@@ -1,0 +1,17 @@
+[
+    {
+        "title": "Judul Film Contoh",
+        "thumbnail": "https://image.tmdb.org/t/p/w500/1E5baAaEse26fej7uHcjOgEE2t2.jpg",
+        "url": "posts/contoh-film.html"
+    },
+    {
+        "title": "Godzilla x Kong",
+        "thumbnail": "https://image.tmdb.org/t/p/w500/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg",
+        "url": "posts/godzilla-x-kong.html"
+    },
+    {
+        "title": "Dune: Part Two",
+        "thumbnail": "https://image.tmdb.org/t/p/w500/kDp1vUB0p2VTf9sE1w2l2d2s2T.jpg",
+        "url": "posts/dune-part-two.html"
+    }
+]
