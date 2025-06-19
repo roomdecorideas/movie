@@ -1,0 +1,154 @@
+/* Pengaturan Dasar dan Latar Belakang */
+body {
+    background-color: #121212; /* Hitam pekat tapi tidak 100% agar tidak melelahkan mata */
+    color: #e0e0e0;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Header dan Navigasi */
+header {
+    background-color: #1c1c1c;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid #333;
+}
+
+.logo {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+main {
+    padding: 2rem;
+}
+
+/* Grid Film di Homepage */
+.movie-grid h1 {
+    color: #fff;
+    border-bottom: 2px solid #e50914; /* Warna aksen seperti Netflix */
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1.5rem;
+}
+
+.movie-card {
+    background-color: #1c1c1c;
+    border-radius: 8px;
+    overflow: hidden;
+    text-decoration: none;
+    color: #e0e0e0;
+    transition: transform 0.2s ease-in-out;
+}
+
+.movie-card:hover {
+    transform: scale(1.05);
+}
+
+/* KUNCI UNTUK THUMBNAIL 2:3 */
+.thumbnail-container {
+    aspect-ratio: 2 / 3; /* Ini akan memaksa container memiliki rasio 2:3 */
+    background-color: #333;
+}
+
+.thumbnail-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Memastikan gambar mengisi container tanpa distorsi */
+}
+
+.movie-card h3 {
+    font-size: 1rem;
+    margin: 0;
+    padding: 1rem;
+    text-align: center;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    background-color: #1c1c1c;
+    border-top: 1px solid #333;
+}
+
+
+/* --- STYLE UNTUK HALAMAN KONTEN --- */
+
+.post-container {
+    max-width: 800px;
+    margin: auto;
+}
+
+.post-header h1 {
+    font-size: 2.5rem;
+    color: #fff;
+}
+
+.youtube-embed {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+}
+
+.youtube-embed iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.article-content h2 {
+    color: #e50914;
+}
+
+.tags {
+    margin: 1.5rem 0;
+}
+
+.tags span {
+    background-color: #333;
+    padding: 0.3rem 0.7rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    margin-right: 0.5rem;
+}
+
+.download-buttons {
+    margin: 2rem 0;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn-download {
+    background-color: #e50914;
+    color: #fff;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.btn-download:hover {
+    background-color: #f6121d;
+}
+
+.related-posts {
+    margin-top: 3rem;
+    border-top: 1px solid #333;
+    padding-top: 1.5rem;
+}
