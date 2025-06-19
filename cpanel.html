@@ -2,56 +2,203 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Control Panel - Generator Postingan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control Panel - Generator Postingan Film</title>
+    
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f0f0f0; margin: 2rem; }
-        .container { max-width: 800px; margin: auto; background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        h1 { text-align: center; }
-        label { display: block; margin-top: 1rem; font-weight: bold; }
-        input[type="text"], textarea { width: 100%; padding: 8px; margin-top: 0.5rem; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        textarea { height: 120px; resize: vertical; }
-        button { background-color: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 1rem; margin-top: 1.5rem; }
-        button:hover { background-color: #218838; }
-        #outputCode { height: 400px; background: #2d2d2d; color: #a9b7c6; font-family: 'Courier New', Courier, monospace; }
-        .filename-suggestion { background-color: #e9ecef; padding: 10px; border-radius: 4px; margin-top: 1rem; font-family: monospace; }
+        /* Pengaturan dasar halaman */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f4f7f9;
+            color: #333;
+            margin: 0;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        /* Container utama untuk membungkus form */
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #ffffff;
+            padding: 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Judul utama */
+        h1 {
+            text-align: center;
+            color: #1a202c;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Sub-judul untuk bagian hasil */
+        h2, h4 {
+            color: #2d3748;
+        }
+
+        /* Styling untuk label input */
+        label {
+            display: block;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        /* Styling untuk semua input teks dan textarea */
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            box-sizing: border-box; /* Penting agar padding tidak menambah lebar */
+            font-size: 1rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        /* Efek focus pada input */
+        input[type="text"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #4a90e2;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+        }
+
+        /* Pengaturan tinggi untuk textarea sinopsis */
+        textarea#sinopsis {
+            height: 150px;
+            resize: vertical; /* Izinkan pengguna mengubah tinggi textarea */
+        }
+
+        /* Tombol Generate */
+        button {
+            display: block;
+            width: 100%;
+            background-color: #28a745;
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 2.5rem;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        /* Garis pemisah */
+        hr {
+            border: none;
+            border-top: 1px solid #e2e8f0;
+            margin: 3rem 0;
+        }
+
+        /* Area untuk menampilkan saran nama file */
+        .filename-suggestion {
+            background-color: #e9ecef;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-top: 1rem;
+            font-family: "Courier New", Courier, monospace;
+            font-weight: bold;
+            color: #495057;
+        }
+
+        /* Styling untuk textarea output */
+        textarea.output {
+            height: 400px;
+            background: #2d2d2d;
+            color: #a9b7c6; /* Warna teks yang nyaman untuk kode */
+            font-family: "Courier New", Courier, monospace;
+            font-size: 0.9rem;
+            white-space: pre;
+            overflow-wrap: normal;
+            overflow-x: scroll;
+        }
+
+        /* Styling khusus untuk output JSON */
+        textarea#outputJson {
+            height: 180px;
+            background: #2d2d2d;
+        }
+        
+        /* Pesan instruksi */
+        .instruction {
+            background-color: #e8f4ff;
+            border-left: 4px solid #4a90e2;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
     </style>
 </head>
 <body>
+
     <div class="container">
         <h1>Generator Postingan Film</h1>
 
-        <label for="judul">Judul Film:</label>
-        <input type="text" id="judul" placeholder="Contoh: Godzilla x Kong: The New Empire">
+        <form id="movie-form" onsubmit="return false;">
+            <label for="judul">Judul Film:</label>
+            <input type="text" id="judul" placeholder="Contoh: Dune: Part Two" required>
 
-        <label for="thumbnail">Link Gambar Thumbnail:</label>
-        <input type="text" id="thumbnail" placeholder="Contoh: https://image.tmdb.org/t/p/w500/....jpg">
+            <label for="thumbnail">Link Gambar Thumbnail:</label>
+            <input type="text" id="thumbnail" placeholder="Contoh: https://image.tmdb.org/t/p/w500/....jpg" required>
+            
+            <label for="youtube">ID Video YouTube:</label>
+            <input type="text" id="youtube" placeholder="Contoh: (Hanya kodenya saja, misal: '1E5baAaEse26fej7uHcjOgEE2t2')" required>
 
-        <label for="youtube">Link YouTube (HANYA KODE videonya):</label>
-        <input type="text" id="youtube" placeholder="Contoh: dari link https://www.youtube.com/watch?v=1E5baAaEse26fej7uHcjOgEE2t2, ambil '1E5baAaEse26fej7uHcjOgEE2t2'">
+            <label for="sinopsis">Sinopsis / Artikel:</label>
+            <textarea id="sinopsis" placeholder="Tulis sinopsis atau review lengkap di sini..." required></textarea>
 
-        <label for="sinopsis">Sinopsis / Artikel:</label>
-        <textarea id="sinopsis" placeholder="Tulis sinopsis atau review lengkap di sini..."></textarea>
+            <label for="tags">Tag Artikel (pisahkan dengan koma):</label>
+            <input type="text" id="tags" placeholder="Contoh: Action, Sci-Fi, Adventure">
 
-        <label for="tags">Tag Artikel (pisahkan dengan koma):</label>
-        <input type="text" id="tags" placeholder="Contoh: Action, Sci-Fi, Monster">
+            <label for="dl_hd">Link Download Kualitas HD:</label>
+            <input type="text" id="dl_hd" placeholder="Opsional: Link GDrive, Mega, dll">
 
-        <label for="dl_hd">Link Download HD:</label>
-        <input type="text" id="dl_hd" placeholder="Link GDrive, Mega, dll">
+            <label for="dl_720">Link Download Kualitas 720p:</label>
+            <input type="text" id="dl_720" placeholder="Opsional: Link GDrive, Mega, dll">
+            
+            <label for="dl_1080">Link Download Kualitas 1080p:</label>
+            <input type="text" id="dl_1080" placeholder="Opsional: Link GDrive, Mega, dll">
 
-        <label for="dl_720">Link Download 720p:</label>
-        <input type="text" id="dl_720" placeholder="Link GDrive, Mega, dll">
-        
-        <label for="dl_1080">Link Download 1080p:</label>
-        <input type="text" id="dl_1080" placeholder="Link GDrive, Mega, dll">
+            <button type="button" id="generateBtn">Generate Kode!</button>
+        </form>
 
-        <button id="generateBtn">Generate Kode HTML!</button>
+        <hr>
 
-        <hr style="margin: 2rem 0;">
-        <h2>Hasil Kode:</h2>
-        <p><strong>Saran Nama File:</strong> <span id="filename-suggestion" class="filename-suggestion"></span></p>
-        <textarea id="outputCode" readonly></textarea>
+        <div id="results-section">
+            <h2>Hasil Kode</h2>
+            
+            <section>
+                <h4>1. Simpan Kode HTML ini</h4>
+                <div class="instruction">
+                    Buat file baru di dalam folder <strong>/posts/</strong> dengan nama file yang disarankan di bawah ini, lalu salin-tempel semua kode dari kotak di bawah ke dalamnya.
+                </div>
+                <p><strong>Saran Nama File:</strong> <span id="filename-suggestion" class="filename-suggestion"></span></p>
+                <textarea id="outputCode" class="output" readonly placeholder="Kode HTML untuk postingan baru akan muncul di sini..."></textarea>
+            </section>
+            
+            <section>
+                <h4 style="margin-top: 2.5rem;">2. Tambahkan Entri JSON ini ke `posts.json`</h4>
+                 <div class="instruction">
+                    Buka file <strong>posts.json</strong>. Tambahkan koma (,) setelah entri terakhir yang sudah ada, lalu salin-tempel kode di bawah ini sesudahnya.
+                </div>
+                <textarea id="outputJson" class="output" readonly placeholder="Kode JSON untuk ditambahkan ke posts.json akan muncul di sini..."></textarea>
+            </section>
+        </div>
     </div>
 
     <script src="script-cpanel.js"></script>
+
 </body>
 </html>
