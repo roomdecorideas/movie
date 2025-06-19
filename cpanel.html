@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Control Panel - Generator Postingan</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f0f0f0; margin: 2rem; }
+        .container { max-width: 800px; margin: auto; background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1 { text-align: center; }
+        label { display: block; margin-top: 1rem; font-weight: bold; }
+        input[type="text"], textarea { width: 100%; padding: 8px; margin-top: 0.5rem; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        textarea { height: 120px; resize: vertical; }
+        button { background-color: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 1rem; margin-top: 1.5rem; }
+        button:hover { background-color: #218838; }
+        #outputCode { height: 400px; background: #2d2d2d; color: #a9b7c6; font-family: 'Courier New', Courier, monospace; }
+        .filename-suggestion { background-color: #e9ecef; padding: 10px; border-radius: 4px; margin-top: 1rem; font-family: monospace; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Generator Postingan Film</h1>
+
+        <label for="judul">Judul Film:</label>
+        <input type="text" id="judul" placeholder="Contoh: Godzilla x Kong: The New Empire">
+
+        <label for="thumbnail">Link Gambar Thumbnail:</label>
+        <input type="text" id="thumbnail" placeholder="Contoh: https://image.tmdb.org/t/p/w500/....jpg">
+
+        <label for="youtube">Link YouTube (HANYA KODE videonya):</label>
+        <input type="text" id="youtube" placeholder="Contoh: dari link https://www.youtube.com/watch?v=1E5baAaEse26fej7uHcjOgEE2t2, ambil '1E5baAaEse26fej7uHcjOgEE2t2'">
+
+        <label for="sinopsis">Sinopsis / Artikel:</label>
+        <textarea id="sinopsis" placeholder="Tulis sinopsis atau review lengkap di sini..."></textarea>
+
+        <label for="tags">Tag Artikel (pisahkan dengan koma):</label>
+        <input type="text" id="tags" placeholder="Contoh: Action, Sci-Fi, Monster">
+
+        <label for="dl_hd">Link Download HD:</label>
+        <input type="text" id="dl_hd" placeholder="Link GDrive, Mega, dll">
+
+        <label for="dl_720">Link Download 720p:</label>
+        <input type="text" id="dl_720" placeholder="Link GDrive, Mega, dll">
+        
+        <label for="dl_1080">Link Download 1080p:</label>
+        <input type="text" id="dl_1080" placeholder="Link GDrive, Mega, dll">
+
+        <button id="generateBtn">Generate Kode HTML!</button>
+
+        <hr style="margin: 2rem 0;">
+        <h2>Hasil Kode:</h2>
+        <p><strong>Saran Nama File:</strong> <span id="filename-suggestion" class="filename-suggestion"></span></p>
+        <textarea id="outputCode" readonly></textarea>
+    </div>
+
+    <script src="script-cpanel.js"></script>
+</body>
+</html>
